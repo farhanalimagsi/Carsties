@@ -1,4 +1,3 @@
-    
 using System.Net;
 using MassTransit;
 using Polly;
@@ -14,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddHttpClient<AuctionSvcHttpClient>().AddPolicyHandler(GetPolicy());
-builder.Services.AddMassTransit(x => 
+builder.Services.AddMassTransit(x =>
 {
     x.AddConsumersFromNamespaceContaining<AuctionCreatedConsumer>();
 
@@ -24,37 +23,31 @@ builder.Services.AddMassTransit(x =>
     {
         cfg.ReceiveEndpoint("search-auction-created", e =>
         {
-            e.UseMessageRetry(r => r.Interval(5, 5));
+            e.UseMessageRetry(r => r.Interval(5,5));
+            
             e.ConfigureConsumer<AuctionCreatedConsumer>(context);
         });
+
         cfg.ConfigureEndpoints(context);
     });
-    
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 
-app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
-app.Lifetime.ApplicationStarted.Register(async () =>
+try
 {
-    try 
-    {
-        await DbInitializer.InitDb(app);
-    }
-    catch (Exception e)     
-    {
-        Console.WriteLine($"Application Start Exception: {e.Message}");
-        throw;
-    }
-});
-
-
+    await DbInitializer.InitDb(app);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
 
 app.Run();
 
@@ -62,5 +55,4 @@ static IAsyncPolicy<HttpResponseMessage> GetPolicy()
     => HttpPolicyExtensions
         .HandleTransientHttpError()
         .OrResult(msg => msg.StatusCode == HttpStatusCode.NotFound)
-        .WaitAndRetryAsync(3, _ => TimeSpan.FromSeconds(5));
-
+        .WaitAndRetryForeverAsync(_ => TimeSpan.FromSeconds(3));

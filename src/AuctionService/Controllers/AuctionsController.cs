@@ -18,6 +18,7 @@ public class AuctionsController(AuctionDbContext context, IMapper mapper,
 {
     [HttpGet]
     public async Task<ActionResult<List<AuctionDto>>> GetAllAuctions(string? date)
+    
     {
         var query = context.Auctions.OrderBy(x => x.Item.Make).AsQueryable();
 
