@@ -1,14 +1,12 @@
-using System;
+using MongoDB.Entities;
+namespace SearchService.Models;
 
-namespace AuctionService.DTO;
-
-public class AuctionDto
+public class Item : Entity
 {
-    public Guid Id { get; set; }
     public int ReservePrice { get; set; }
-    public string? Seller { get; set;}
-    public string? Winner { get; set; }
-    public int SoldAmount { get; set; }
+    public string Seller { get; set;}
+    public string Winner { get; set; }
+    public int? SoldAmount { get; set; }
     public int CurrentHighBid { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime UpdatedAt { get; set; }
@@ -20,6 +18,4 @@ public class AuctionDto
     public string Color { get; set; }
     public int Mileage { get; set; }
     public string ImageUrl { get; set; }
-
-
 }

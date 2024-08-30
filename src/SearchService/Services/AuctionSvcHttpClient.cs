@@ -1,19 +1,13 @@
 using System;
 using MongoDB.Entities;
-using SearchService.Controllers;
+using SearchService.Models;
 
 namespace SearchService.Services;
 
-public class AuctionSvcHttpClient
+public class AuctionSvcHttpClient(HttpClient httpClient, IConfiguration config)
 {
-    private HttpClient _httpClient;
-    private IConfiguration _config;
-
-    public AuctionSvcHttpClient(HttpClient httpClient, IConfiguration config)
-    {
-        _config = config;
-        _httpClient = httpClient;
-    }
+    private readonly HttpClient _httpClient = httpClient;
+    private readonly IConfiguration _config = config;
 
     public async Task<List<Item>> GetItemsForSearchDb()
     {
