@@ -9,7 +9,6 @@ type Props = {
 export default function CardImage({imageUrl}: Props) {
     const[isLoading, setLoading] = useState(true);
   return (
-    <div>
         <Image 
                 src={imageUrl}
                 // alt={`Image of ${auction.make} ${auction.model} in ${auction.color}`}
@@ -25,6 +24,5 @@ export default function CardImage({imageUrl}: Props) {
                     `}
                 onLoad={()=> setLoading(false)}
             />
-    </div>
   )
 }
