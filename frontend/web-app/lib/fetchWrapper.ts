@@ -1,4 +1,4 @@
-import { auth } from "@/auth";
+import { auth } from '@/auth';
 
 const baseUrl = 'http://localhost:6001/';
 
@@ -9,11 +9,11 @@ async function get(url: string) {
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-    return handleResponse(response);
 
+    return handleResponse(response);
 }
 
-async function post(url: string, body:{}) {
+async function post(url: string, body: {}) {
     const requestOptions = {
         method: 'POST',
         headers: await getHeaders(),
@@ -21,11 +21,11 @@ async function post(url: string, body:{}) {
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-    return handleResponse(response);
 
+    return handleResponse(response);
 }
 
-async function put(url: string, body:{}) {
+async function put(url: string, body: {}) {
     const requestOptions = {
         method: 'PUT',
         headers: await getHeaders(),
@@ -33,8 +33,8 @@ async function put(url: string, body:{}) {
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-    return handleResponse(response);
 
+    return handleResponse(response);
 }
 
 async function del(url: string) {
@@ -44,11 +44,11 @@ async function del(url: string) {
     }
 
     const response = await fetch(baseUrl + url, requestOptions);
-    return handleResponse(response);
 
+    return handleResponse(response);
 }
 
-async function getHeaders(){
+async function getHeaders() {
     const session = await auth();
     const headers = {
         'Content-type': 'application/json'
@@ -56,20 +56,21 @@ async function getHeaders(){
     if (session?.accessToken) {
         headers.Authorization = 'Bearer ' + session.accessToken
     }
-    return headers
+    return headers;
 }
 
 async function handleResponse(response: Response) {
     const text = await response.text();
     const data = text && JSON.parse(text);
 
-    if(response.ok){
+    if (response.ok) {
         return data || response.statusText
     } else {
         const error = {
             status: response.status,
             message: response.statusText
         }
+
         return {error};
     }
 }

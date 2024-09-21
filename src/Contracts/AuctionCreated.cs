@@ -9,7 +9,7 @@ public class AuctionCreated
     public DateTime UpdatedAt { get; set; }
     public DateTime AuctionEnd { get; set; }
     public required string Seller { get; set; }
-    public string? Winner { get; set; }
+    public string Winner { get; set; }
     public required string Make { get; set; }
     public required string Model { get; set; }
     public int Year { get; set; }

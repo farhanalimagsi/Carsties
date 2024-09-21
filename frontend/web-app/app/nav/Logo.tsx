@@ -14,9 +14,16 @@ export default function Logo() {
   const reset = useParamsStore(state => state.reset);
 
   return (
-    <div onClick={doReset} className="flex items-center text-3xl cursor-pointer gap-2 font-semibold text-red-500">
-        <AiOutlineCar size={34}/>
-        <div className='flex text-sm sm:text-base md:text-2xl lg:text-2xl xl:text-3xl'>Carsties Auctions</div>
+    <div className="flex justify-center sm:justify-start">
+      <div
+        onClick={doReset}
+        className="flex items-center text-3xl cursor-pointer gap-2 font-semibold text-red-500"
+      >
+        <AiOutlineCar size={34} />
+        <div className="text-2xl xl:text-3xl">
+          Carsties Auctions
+        </div>
       </div>
-  )
+    </div>
+  );
 }

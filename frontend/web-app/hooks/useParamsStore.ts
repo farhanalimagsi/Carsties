@@ -10,7 +10,6 @@ type State = {
     filterBy: string,
     seller?: string
     winner?: string
-    
 }
 
 type Actions = {
@@ -29,7 +28,6 @@ const initialState: State = {
     filterBy: 'live',
     seller: undefined,
     winner: undefined
-
 }
 
 export const useParamsStore = create<State & Actions>()((set) => ({

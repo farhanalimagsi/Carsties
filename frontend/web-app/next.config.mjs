@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
     // Enable logging of fetches with full URLs (for debugging purposes)
     logging: {
       fetches: {

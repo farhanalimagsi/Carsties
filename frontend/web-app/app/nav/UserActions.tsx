@@ -30,27 +30,29 @@ export default function UserActions({user}: Props) {
 
 
   return (
-    <Dropdown inline label={`Welocme ${user.name}`}>
-      <DropdownItem icon={HiUser} onClick={setSeller}> 
-        My Auctions
-      </DropdownItem>
-      <DropdownItem icon={AiFillTrophy} onClick={setWinner}> 
-        Auctions won
-      </DropdownItem>
-      <DropdownItem icon={AiFillCar}> 
-        <Link href='/auctions/create'>
-        Sell my car
-        </Link>
-      </DropdownItem>
-      <DropdownItem icon={HiClock}> 
-        <Link href='/session'>
-        Session(dev only)
-        </Link>
-      </DropdownItem>
-      <DropdownDivider />
-      <DropdownItem icon={AiOutlineLogout} onClick={()=> signOut({callbackUrl: '/'})}> 
-        Signed Out
-      </DropdownItem>
+      <Dropdown 
+        inline label={`Welocme ${user.name}`}>
+        <DropdownItem icon={HiUser} onClick={setSeller}> 
+          My Auctions
+        </DropdownItem>
+        <DropdownItem icon={AiFillTrophy} onClick={setWinner}> 
+          Auctions won
+        </DropdownItem>
+        <DropdownItem icon={AiFillCar}> 
+          <Link href='/auctions/create'>
+          Sell my car
+          </Link>
+        </DropdownItem>
+        <DropdownItem icon={HiClock}> 
+          <Link href='/session'>
+          Session(dev only)
+          </Link>
+        </DropdownItem>
+        <DropdownDivider />
+        <DropdownItem icon={AiOutlineLogout} onClick={()=> signOut({callbackUrl: '/'})}> 
+          Signed Out
+        </DropdownItem>
     </Dropdown>
+    
     )
 }

@@ -48,10 +48,10 @@ export default function Filters() {
     const orderBy = useParamsStore(state => state.orderBy);
     const filterBy = useParamsStore(state => state.filterBy);
   return (
-    <div className='flex justify-between items-center mb-4'>
+    <div className='flex flex-col  lg:flex-row justify-between items-center mb-4'>
 
-<div>
-            <span className='uppercase te0xt-sm text-gray-500 mr-2'>Filter by</span>
+        <div>
+            <span className='uppercase text-sm text-gray-500 mr-2'>Filter by</span>
             <ButtonGroup>
                 {filterButtons.map(({label, icon: IconBase, value}) => (
                     <Button
@@ -68,7 +68,7 @@ export default function Filters() {
 
 
         <div>
-            <span className='uppercase te0xt-sm text-gray-500 mr-2'>Order by</span>
+            <span className='uppercase text-sm text-gray-500 mr-2'>Order by</span>
             <ButtonGroup>
                 {orderButtons.map(({label, icon: IconBase, value}) => (
                     <Button

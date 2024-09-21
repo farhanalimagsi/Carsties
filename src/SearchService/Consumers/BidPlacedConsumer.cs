@@ -1,4 +1,3 @@
-using System;
 using Contracts;
 using MassTransit;
 using MongoDB.Entities;
@@ -12,7 +11,7 @@ public class BidPlacedConsumer : IConsumer<BidPlaced>
     {
         Console.WriteLine("---> Consuming bid placed");
         
-        var auction = await DB.Find<Item>().OneAsync(context.Message.AuctionId);
+        var auction = await DB.Find<Item>().OneAsync(Guid.Parse(context.Message.AuctionId));
 
         if (context.Message.BidStatus.Contains("Accepted") 
             && context.Message.Amount > auction.CurrentHighBid)

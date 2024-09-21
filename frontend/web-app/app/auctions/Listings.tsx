@@ -7,9 +7,9 @@ import { Auction, PagedResult } from '@/types';
 import { getData } from '../actions/auctionsActions';
 import Filters from './Filters';
 import {useParamsStore} from '@/hooks/useParamsStore';
-import { useShallow } from 'zustand/react/shallow';
 import queryString from 'query-string';
 import EmptyFilter from '../components/EmptyFilter';
+import { useShallow } from 'zustand/react/shallow';
 
 
 export default function Listings() {
@@ -31,11 +31,16 @@ export default function Listings() {
     setParams({pageNumber})
   }
 
-  useEffect(()=>{
-    getData(url).then(data =>{
-      setData(data);
-    })
-  }, [url])
+  useEffect(() => {
+    getData(url)
+      .then((data) => {
+        setData(data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+        // You can set some state here to show an error message if needed
+      });
+  }, [url]);
 
   if (!data) return <h3>Loading.....</h3>
   
